@@ -41,6 +41,10 @@ app.config(['$routeProvider',
         templateUrl: 'templates/make.html',
         controller: 'makeCtrl'
       }).
+      when('/shoutout/:classId', {
+        templateUrl: 'templates/shoutout.html',
+        controller: 'shoutoutCtrl'
+      }).
       otherwise({
         redirectTo: '/'
       });

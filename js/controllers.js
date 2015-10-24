@@ -29,7 +29,7 @@ app.controller('signupCtrl', ['$scope', '$routeParams','auth','$location',
     }else{
       $scope.user.teacher = false;
     }
-    
+
     // Signup button clicked
     $scope.signup = function(){
       //added the call to authFactory
@@ -72,4 +72,14 @@ app.controller('makeCtrl', ['$scope', '$routeParams','lectureMake',
 
 
     }
+  }]);
+
+app.controller('shoutoutCtrl', ['$scope', '$routeParams',
+  function($scope, $routeParams) {
+    $scope.classId = $routeParams.classId;
+    // When the submit text message button is clicked
+    $scope.sendText = function(){
+      alert("You called me");
+    }
+    
   }]);
