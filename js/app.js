@@ -10,15 +10,19 @@ app.config(['$routeProvider',
         templateUrl: 'templates/home.html',
         controller: 'homeCtrl'
       }).
-      when('/classes', {
+      when('/class', {
       	templateUrl: 'templates/classes.html',
-      	controller: 'classesCtrl'
+      	controller: 'classCtrl'
       }).
-      when('lecture/:id', {
-      	templateUrl: 'templates/lecture.html',
+      when('/lecture/:classId', {
+      	templateUrl: 'templates/lecture_list.html',
       	controller: 'lectureCtrl'
       }).
-      when('/stream', {
+      when('/lecture/:classId/:lectureId', {
+        templateUrl: 'templates/lecture.html',
+        controller: 'lectureCtrl'
+      }).
+      when('/stream/:id', {
       	templateUrl: 'templates/stream.html',
       	controller: 'streamCtrl'
       }).
