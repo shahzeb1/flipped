@@ -29,12 +29,9 @@ app.controller('signupCtrl', ['$scope', '$routeParams','auth','$location',
     }else{
       $scope.user.teacher = false;
     }
-
-
-
+    
     // Signup button clicked
     $scope.signup = function(){
-      //alert('you called me');
       //added the call to authFactory
       auth.register($scope.user).error(function(error){
         $scope.error = error;
@@ -49,8 +46,7 @@ app.controller('loginCtrl', ['$scope', '$routeParams','auth','$location',
   function($scope, $routeParams, auth, $location) {
     $scope.user = {};
     $scope.login = function(){
-      //alert('you called me');
-      //addded the call to authFactory
+      // added the call to authFactory
       auth.logIn($scope.user).error(function(error){
         $scope.error = error;
       }).then(function(){
@@ -68,5 +64,9 @@ app.controller('forumCtrl', ['$scope', '$routeParams',
 
 app.controller('makeCtrl', ['$scope', '$routeParams',
   function($scope, $routeParams) {
+    $scope.lecture = {};
     $scope.classId = $routeParams.classId;
+    $scope.postLecture = function(){
+      alert("You called me");
+    }
   }]);
