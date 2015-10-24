@@ -1,5 +1,6 @@
 /**
  * Created by lschubert on 10/24/15.
+ * used for the making and retrieving of lectures
  */
 
 'use strict';
@@ -17,6 +18,8 @@ function lectureFactory($http, $window){
             }
         );
     }
+
+    //get lecture by id
 
     return lectureMake;
 };
