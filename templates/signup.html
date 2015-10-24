@@ -15,6 +15,9 @@
         margin-top: 30px;
         width: 100%;
       }
+      .username{
+        text-transform: capitalize;
+      }
     </style>
    <div class="container">
     <!-- Header -->
@@ -25,12 +28,12 @@
     </header>
     <!-- Start of Content -->
     <content>
-      <h1>Hello. You're signing up as a {{signupType}}</h1>
-      <form>
-        <input type="text" class="form-control input-lg" placeholder="Username" name="username">
-        <input type="email" class="form-control input-lg" placeholder="Email" name="email">
-        <input type="password" class="form-control input-lg" placeholder="Password" name="password">
-        <button class="btn btn-lg btn-primary">Join the heard.</button>
+      <h1>Hello <span class="username">{{user.username}}</span>. You're signing up as a {{signupType}}.</h1>
+      <form ng-submit="signup()">
+        <input type="text" class="form-control input-lg" placeholder="Username" ng-model="user.username">
+        <input type="email" class="form-control input-lg" placeholder="Email" ng-model="user.email">
+        <input type="password" class="form-control input-lg" placeholder="Password" ng-model="user.password">
+        <input type="submit" class="btn btn-lg btn-primary" value="Join the heard">
       </form>
     </content>
   </div>
