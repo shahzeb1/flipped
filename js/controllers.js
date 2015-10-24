@@ -44,3 +44,9 @@ app.controller('loginCtrl', ['$scope', '$routeParams',
       alert('you called me')
     }
   }]);
+
+app.controller('forumCtrl', ['$scope', '$routeParams',
+  function($scope, $routeParams) {
+    $scope.lectureId = $routeParams.lectureId;
+    $scope.questionId = $routeParams.questionId;
+  }]);

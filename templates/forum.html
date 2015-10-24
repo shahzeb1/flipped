@@ -21,14 +21,28 @@
         font-size: 20pt;
         margin-bottom: 30px;
       }
-    </style>
-   <div class="container">
-    <!-- Header -->
-    <header>
-     <div class="row">
-      <div class="col-md-9"><h3><a href="#/">flipped.</a></h3></div>
-      <div class="col-md-3" style="padding-top: 30px">
-					<div class="btn-group">
+      img{
+        width: 50px;
+      }
+      form{
+        margin-bottom: 50px;
+      }
+      .lecture-btn{
+        background: #A0D468;
+        border: 0px;
+        margin-top: 50px;
+      }
+      .lecture-btn:hover{
+        background: #8CC152;
+      }
+      </style>
+      <div class="container">
+        <!-- Header -->
+        <header>
+         <div class="row">
+          <div class="col-md-9"><h3><a href="#/">flipped.</a></h3></div>
+          <div class="col-md-3" style="padding-top: 30px">
+           <div class="btn-group">
             <button type="button" class="btn btn-primary btn-lg"><i class="fa fa-home"></i></button>
             <button type="button" class="btn btn-primary btn-lg"><i class="fa fa-user"></i></button>
             <button type="button" class="btn btn-primary btn-lg"><i class="fa fa-comment"></i></button>
@@ -56,48 +70,50 @@
               <li><a href="#">Add more classes</a></li>
             </ul>
           </div>
+          <button class="btn btn-lg btn-primary lecture-btn"><i class="fa fa-chevron-left"></i> Back to lecture</button>
         </div>
         <!-- End of sidebar -->
         <div class="col-md-9">
           <!-- Breadcrums -->
-        <ol class="breadcrumb" style="margin-top: 20px">
-          <li><a href="#">Home</a></li>
-          <li><a href="#">Math 101</a></li>
-          <li><a href="#">Lecture #{{lectureId}}</a></li>
-          <li class="active">Question forum</li>
-        </ol>
+          <ol class="breadcrumb" style="margin-top: 20px">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Math 101</a></li>
+            <li><a href="#">Lecture #{{lectureId}}</a></li>
+            <li class="active">Question forum</li>
+          </ol>
           <h2>"Find the integral of y=mx+b"</h2>
-           
-           <ul class="media-list">
-              <li class="media">
-                <a class="pull-left" href="#"><img class="media-object img-rounded" src="img/photo-1.jpg"></a>
-                <div class="media-body">
-                  <h4 class="media-heading">Media heading</h4>
-                  <p>12 Apr, 2013 at 12:00</p>
-                  <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.</p>
-                  <!-- Nested media object -->
-                  <div class="media">
-                    <a class="pull-left" href="#"><img class="media-object img-rounded" src="img/photo-2.jpg"></a>
-                    <div class="media-body">
-                      <h4 class="media-heading">Nested media heading</h4>
-                      <p>12 Apr, 2013 at 12:10</p>
-                      <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.</p>
-                    </div>
+          <br>
+          <ul class="media-list">
+            <li class="media">
+              <a class="pull-left" href="#"><img class="media-object img-rounded" src="img/me.jpg"></a>
+              <div class="media-body">
+                <h4 class="media-heading">Media heading</h4>
+                <p>12 Apr, 2013 at 12:00</p>
+                <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.</p>
+                <!-- Nested media object -->
+                <div class="media">
+                  <a class="pull-left" href="#"><img class="media-object img-rounded" src="img/me.jpg"></a>
+                  <div class="media-body">
+                    <h4 class="media-heading">Nested media heading</h4>
+                    <p>12 Apr, 2013 at 12:10</p>
+                    <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.</p>
                   </div>
-                  <!-- Nested media object -->
-                      <div class="media">
-                        <a class="pull-left" href="#"><img class="media-object img-rounded" src="img/photo-3.jpg"></a>
-                        <div class="media-body">
-                          <h4 class="media-heading">Nested media heading</h4>
-                          <p>12 Apr, 2013 at 12:20</p>
-                          <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.</p>
-                        </div>
-                      </div>
-            </ul>
-
-
-        </div>
+                </div>
+                <!-- Nested media object -->
+                <div class="media">
+                  <a class="pull-left" href="#"><img class="media-object img-rounded" src="img/me.jpg"></a>
+                  <div class="media-body">
+                    <h4 class="media-heading">Nested media heading</h4>
+                    <p>12 Apr, 2013 at 12:20</p>
+                    <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.</p>
+                  </div>
+                </div>
+              </ul>
+              <form ng-submit="comment()">
+                <textarea class="form-control" rows="3" placeholder="Your comment."></textarea><br>
+                <button class="btn btn-lg btn-primary">Post comment</button>
+              </form>
+            </div>
+          </div>
+        </content>
       </div>
-    </content>
-  </div>
-  <!-- End of container -->
