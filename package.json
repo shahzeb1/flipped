@@ -1,7 +1,7 @@
 {
-	"name": "NodejsStarterApp",
+	"name": "Flipped",
 	"version": "0.0.1",
-	"description": "A sample nodejs app for Bluemix",
+	"description": "Lets turn things on their head.",
 	"scripts": {
 		"start": "node app.js"
 	},
