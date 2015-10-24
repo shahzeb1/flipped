@@ -14,8 +14,9 @@ app.controller('streamCtrl', ['$scope', '$routeParams',
     $scope.streamId = $routeParams.id;
   }]);
 
-app.controller('signupCtrl', ['$scope', '$routeParams',
-  function($scope, $routeParams) {
+app.controller('signupCtrl', ['$scope', '$routeParams','auth',
+  function($scope, $routeParams, auth) {
+    $scope.user = {};
     $scope.signupType = $routeParams.type;
     // Check if the type is student or teacher
     if($scope.signupType != "student" && $scope.signupType != "teacher"){
@@ -24,23 +25,27 @@ app.controller('signupCtrl', ['$scope', '$routeParams',
     
     // Are we dealing with a tacher?
     if($scope.signupType == "teacher"){
-      var teacher = true;
+      $scope.user.teacher = true;
     }else{
-      var teacher = false;
+      $scope.user.teacher = false;
     }
 
-    $scope.user = {};
+
+
     // Signup button clicked
     $scope.signup = function(){
       alert('you called me');
+      auth.register($scope.user);
     }
 
   }]);
 
-app.controller('loginCtrl', ['$scope', '$routeParams',
-  function($scope, $routeParams) {
+app.controller('loginCtrl', ['$scope', '$routeParams','auth',
+  function($scope, $routeParams, auth) {
     $scope.user = {};
     $scope.login = function(){
       alert('you called me')
+      auth.logIn($scope.user)
+
     }
   }]);
