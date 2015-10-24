@@ -8,9 +8,13 @@ run.$inject = ['$http'];
 
 function run($http) {
 
+  var moxtra_client_id = "pFGtS5moH6w"; // THIS IS FROM MOXTRA
+
   getMoxtraToken("this_is_a_userid").then(function(data){
-    debugger;
-    initMoxtra(data);
+    if(data.status != 200){
+      alert("couldn't reach mostra");
+    }
+    initMoxtra(data.data);
   });
 
 
@@ -19,7 +23,7 @@ function run($http) {
   function initMoxtra(data) {
     var options = {
         mode: "sandbox", //for production environment change to "production"
-        client_id: data.client_id,
+        client_id: moxtra_client_id,
         access_token: data.access_token, //valid access token from user authentication
         invalid_token: function(event) {
             alert("Access Token expired for session id: " + event.session_id);
