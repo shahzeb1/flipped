@@ -14,6 +14,10 @@ app.config(['$routeProvider',
         templateUrl: 'templates/signup.html',
         controller: 'signupCtrl'
       }).
+      when('/login', {
+        templateUrl: 'templates/login.html',
+        controller: 'loginCtrl'
+      }).
       when('/class', {
       	templateUrl: 'templates/classes.html',
       	controller: 'classCtrl'

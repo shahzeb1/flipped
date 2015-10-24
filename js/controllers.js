@@ -19,4 +19,12 @@ flippedCtrl.controller('streamCtrl', ['$scope', '$routeParams',
 flippedCtrl.controller('signupCtrl', ['$scope', '$routeParams',
   function($scope, $routeParams) {
     $scope.signupType = $routeParams.type;
+    // Check if the type is student or teacher
+    if($scope.signupType != "student" || $scope.signupType != "teacher"){
+    	$scope.signupType = "student";	
+    }
+  }]);
+
+flippedCtrl.controller('loginCtrl', ['$scope', '$routeParams',
+  function($scope, $routeParams) {
   }]);
