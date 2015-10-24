@@ -1,16 +1,19 @@
 {
-	"name": "Flipped",
-	"version": "0.0.1",
-	"description": "Lets turn things on their head.",
-	"scripts": {
-		"start": "node app.js"
-	},
-	"dependencies": {
-		"express": "4.12.x",
-		"cfenv": "1.0.x"
-	},
-	"repository": {},
-	"engines": {
-		"node": "0.12.x"
-	} 
+  "name": "Flipped",
+  "version": "0.0.1",
+  "description": "Lets turn things on their head.",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "cfenv": "1.0.x",
+    "cryptojs": "^2.5.3",
+    "express": "4.12.x",
+    "lodash": "^3.10.1",
+    "request": "^2.65.0"
+  },
+  "repository": {},
+  "engines": {
+    "node": "0.12.x"
+  }
 }
