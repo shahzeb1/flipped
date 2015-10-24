@@ -34,6 +34,10 @@ app.config(['$routeProvider',
       	templateUrl: 'templates/stream.html',
       	controller: 'streamCtrl'
       }).
+      when('/forum/:lectureId/:questionId', {
+        templateUrl: 'templates/forum.html',
+        controller: 'forumCtrl'
+      }).
       otherwise({
         redirectTo: '/'
       });
