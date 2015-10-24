@@ -14,8 +14,8 @@ app.controller('streamCtrl', ['$scope', '$routeParams',
     $scope.streamId = $routeParams.id;
   }]);
 
-app.controller('signupCtrl', ['$scope', '$routeParams','auth',
-  function($scope, $routeParams, auth) {
+app.controller('signupCtrl', ['$scope', '$routeParams','auth','$location',
+  function($scope, $routeParams, auth, $location) {
     $scope.user = {};
     $scope.signupType = $routeParams.type;
     // Check if the type is student or teacher
@@ -36,18 +36,26 @@ app.controller('signupCtrl', ['$scope', '$routeParams','auth',
     $scope.signup = function(){
       //alert('you called me');
       //added the call to authFactory
-      auth.register($scope.user);
+      auth.register($scope.user).error(function(error){
+        $scope.error = error;
+      }).then(function(){
+        $location.path('/class');
+      });
     }
 
   }]);
 
-app.controller('loginCtrl', ['$scope', '$routeParams','auth',
-  function($scope, $routeParams, auth) {
+app.controller('loginCtrl', ['$scope', '$routeParams','auth','$location',
+  function($scope, $routeParams, auth, $location) {
     $scope.user = {};
     $scope.login = function(){
       //alert('you called me');
       //addded the call to authFactory
-      auth.logIn($scope.user);
+      auth.logIn($scope.user).error(function(error){
+        $scope.error = error;
+      }).then(function(){
+        $location.path('/class');
+      });
 
     }
   }]);
