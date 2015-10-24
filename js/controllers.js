@@ -34,7 +34,8 @@ app.controller('signupCtrl', ['$scope', '$routeParams','auth',
 
     // Signup button clicked
     $scope.signup = function(){
-      alert('you called me');
+      //alert('you called me');
+      //added the call to authFactory
       auth.register($scope.user);
     }
 
@@ -44,8 +45,9 @@ app.controller('loginCtrl', ['$scope', '$routeParams','auth',
   function($scope, $routeParams, auth) {
     $scope.user = {};
     $scope.login = function(){
-      alert('you called me')
-      auth.logIn($scope.user)
+      //alert('you called me');
+      //addded the call to authFactory
+      auth.logIn($scope.user);
 
     }
   }]);
