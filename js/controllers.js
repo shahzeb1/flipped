@@ -15,3 +15,8 @@ flippedCtrl.controller('streamCtrl', ['$scope', '$routeParams',
   function($scope, $routeParams) {
     $scope.streamId = $routeParams.id;
   }]);
+
+flippedCtrl.controller('signupCtrl', ['$scope', '$routeParams',
+  function($scope, $routeParams) {
+    $scope.signupType = $routeParams.type;
+  }]);

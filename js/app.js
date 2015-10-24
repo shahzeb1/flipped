@@ -10,6 +10,10 @@ app.config(['$routeProvider',
         templateUrl: 'templates/home.html',
         controller: 'homeCtrl'
       }).
+      when('/signup/:type', {
+        templateUrl: 'templates/signup.html',
+        controller: 'signupCtrl'
+      }).
       when('/class', {
       	templateUrl: 'templates/classes.html',
       	controller: 'classCtrl'
