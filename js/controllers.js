@@ -57,3 +57,8 @@ app.controller('forumCtrl', ['$scope', '$routeParams',
     $scope.lectureId = $routeParams.lectureId;
     $scope.questionId = $routeParams.questionId;
   }]);
+
+app.controller('makeCtrl', ['$scope', '$routeParams',
+  function($scope, $routeParams) {
+    $scope.classId = $routeParams.classId;
+  }]);

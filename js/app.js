@@ -37,6 +37,10 @@ app.config(['$routeProvider',
         templateUrl: 'templates/forum.html',
         controller: 'forumCtrl'
       }).
+      when('/make/:classId', {
+        templateUrl: 'templates/make.html',
+        controller: 'makeCtrl'
+      }).
       otherwise({
         redirectTo: '/'
       });

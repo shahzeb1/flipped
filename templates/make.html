@@ -1,0 +1,63 @@
+      <style>
+      h3 a{
+        color: black;
+      }
+      header{
+        margin-top: 30px;
+      }
+      h2{
+        text-align: center;
+      }
+      form{
+        margin-bottom: 50px;
+      }
+      input{
+        width: 100%;
+      }
+      .form-control{
+        margin-bottom: 10px;
+      }
+      </style>
+      <div class="container">
+        <!-- Header -->
+        <header>
+         <div class="row">
+          <div class="col-md-9"><h3><a href="#/">flipped.</a></h3></div>
+          <div class="col-md-3" style="padding-top: 30px">
+           <div class="btn-group">
+            <button type="button" class="btn btn-primary btn-lg"><i class="fa fa-home"></i></button>
+            <button type="button" class="btn btn-primary btn-lg"><i class="fa fa-user"></i></button>
+            <button type="button" class="btn btn-primary btn-lg"><i class="fa fa-comment"></i></button>
+            <button type="button" class="btn btn-primary btn-lg"><i class="fa fa-sign-out"></i></button>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- Start of Content -->
+    <content>
+      <div class="row" style="height: 500px">
+        <div class="col-md-3">
+        </div>
+        <!-- End of sidebar -->
+        <div class="col-md-9">
+          <!-- Breadcrums -->
+          <ol class="breadcrumb" style="margin-top: 20px">
+            <li><a href="#">Home</a></li>
+            <li class="active">Class {{classId}}</li>
+          </ol>
+          <h2>Lecture Creator</h2>
+          <br><form ng-submit="postLecture()">
+          <input type="text" class="form-control input-lg" placeholder="YouTube link" ng-model="lecture.youtube">
+          <h3>Question:</h3>
+          <input type="text" class="form-control" placeholder="Question text." ng-model="lecture.question">
+          <h3>Answers:</h3>
+          <input type="text" class="form-control" placeholder="A." ng-model="lecture.answerA">
+          <input type="text" class="form-control" placeholder="B." ng-model="lecture.answerB">
+          <input type="text" class="form-control" placeholder="C." ng-model="lecture.answerC">
+          <input type="text" class="form-control" placeholder="D." ng-model="lecture.answerD">
+          <input type="submit" value="Post New Lecture" class="btn btn-primary">
+          </form>
+        </div>
+      </div>
+    </content>
+  </div>
