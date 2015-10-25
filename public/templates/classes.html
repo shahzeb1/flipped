@@ -53,11 +53,11 @@
 		</div>
 		<!-- For each class... -->
 		<div class="row">
-			<div class="col-md-4" ng-repeat="classtitle in classList">
-				<div class="jumbotron"  ng-click="classClick(classtitle)">
-					<div class="jumbotron-photo"><img src="img/italy.jpg" /></div>
+			<div class="col-md-4" ng-repeat="class in classList">
+				<div class="jumbotron"  ng-click="classClick(class.ClassId)">
+					<div class="jumbotron-photo"><img src="img/{{class.Img}}" /></div>
 					<div class="jumbotron-contents" style="background: #3BAFDA">
-						<h1>{{classtitle}}</h1>
+						<h1>{{class.Name}}</h1>
 					</div>
 				</div>
 			</div>

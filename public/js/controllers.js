@@ -19,7 +19,11 @@ app.controller('homeCtrl', ['$scope', '$routeParams',
 
 app.controller('classCtrl', ['$scope', '$routeParams','auth','fClass','$location',
   function($scope, $routeParams,auth,fClass,$location) {
-    $scope.classList = ["Math1","Math2","Math3"];
+    $scope.classList = [
+    {Name: "Chemistry 101",  Img: "chemistry.jpg",  ClassId: "1"},
+    {Name: "Math 101",  Img: "math.jpg",  ClassId: "2"},
+    {Name: "Italy",  Img: "italy.jpg",  ClassId: "3"}
+    ];
 
     $scope.classClick = function(classTitle){
       //console.log(classTitle);
