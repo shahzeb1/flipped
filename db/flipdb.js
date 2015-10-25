@@ -296,18 +296,13 @@ function retrieveClassId(classCode, cb) {
 function saveLecture(lecture , done){
 
     var client = new pg.Client(conString);
-    client.on('drain', client.end.bind(client)); //disconnect client when all queries are finished
-    client.connect(function(err) {
-        if(err) {
-            return cb(err);
-        }
-
+    client.connect();
         async.series([
             function saveLecture(cb) {
                 var queryString =
                     "  INSERT INTO lecture" +
                     "  (id, name, classId, videoUrl)" +
-                    "  VALUES ($1, $2, $3, $4, $5)";
+                    "  VALUES ($1, $2, $3, $4)";
 
 
                 client.query(queryString, [lecture.id, lecture.name, lecture.classId, lecture.videoUrl], function(err) {
@@ -319,47 +314,63 @@ function saveLecture(lecture , done){
                 });
             },
             function saveProblems(cb) {
-                for (i =0; i< lecture.problems.length; i++) {
+                for (var i =0; i< lecture.problems.length; i++) {
                     var queryString =
                         "  INSERT INTO problem" +
                         "  (id, lectureId, problemType, question)" +
                         "  VALUES ($1, $2, $3, $4)";
 
-
-                    client.query(queryString, [i ,lecture.id, lecture.problem[i].problemType, lecture.problem[i].question], function(err) {
+                    client.query(queryString, [i ,lecture.id, lecture.problems[i].problemType, lecture.problems[i].question], function(err) {
                         if(err) {
                             console.log(err);
                             return cb(err);
                         }
                         //time to move on
-                        if (i== lecture.problems.length-1) {
-                            cb(null)
+                        console.log(i);
+                        if ( i == lecture.problems.length) {
+                            console.log("moved on");
+                            cb(null);
                         }
                     });
                 }
             },
             function saveAnswers(cb) {
+                async.each(lecture.problems[0].answers , function(answer, next) {
+                    console.log(answer);
+                    var queryString =
+                        "  INSERT INTO problemAnswer" +
+                        "  (id, problemId, lectureId, possibleAnswer, correctAnswer)" +
+                        "  VALUES ($1, $2, $3, $4, $5)";
 
-                for (i = 0; i < lecture.problems.length; i++) {
-                    for (j = 0; j < lecture.problems.answers.length; j++) {
-                        var queryString =
-                            "  INSERT INTO problemAnswer" +
-                            "  (id, problemId, lectureId, possibleAnswer, correctAnswer)" +
-                            "  VALUES ($1, $2, $3, $4, $5)";
 
-
-                        client.query(queryString, [j, i, lecture.problem[i].lectureId, lecture.problem[i].answer[j].possibleAnswer, lecture.problem[i].answer[j].correctAnswer], function (err) {
-                            if (err) {
-                                console.log(err);
-                                return cb(err);
-                            }
-                            //time to move on
-                            if (i == lecture.problems.length - 1 && j == lecture.problems.answers.length - 1) {
-                                cb(null)
-                            }
-                        });
+                    client.query(queryString, [answer.id, 0, lecture.id, answer.possibleAnswer, answer.correctAnswer], function (err) {
+                        if (err) {
+                            console.log(err);
+                            return cb(err);
+                        }
+                        next();
+                    });
+                } , function(err) {
+                    if (err) {
+                        //bla bla bla
                     }
-                }
+                    cb(null);
+                });
+                //console.log("enetered save answer");
+                //for (var i = 0; i < lecture.problems.length; i++) {
+                //    for (var j = 0; j < lecture.problems[i].answers.length; j++) {
+                //
+                //            //time to move on
+                //            if (i == lecture.problems.length){
+                //                if (j == lecture.problems[i-1].answers.length) {
+                //                    console.log(j)
+                //                    console.log(lecture.problems[i-1].answers.length);
+                //                    console.log("why so many times?");
+                //                    cb(null)
+                //                }
+                //            }
+                //    }
+                //}
             }
         ] , function (err, results) {
             if (err) {
@@ -367,13 +378,6 @@ function saveLecture(lecture , done){
             }
             done();
         });
-
-
-
-
-
-
-    });
 }
 
 module.exports.test =  test;
