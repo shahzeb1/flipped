@@ -8,15 +8,10 @@ var uuid = require('uuid');
 var User = require('../db/helper').User;
 var insertData = require('../db/flipdb').insertData;
 var retrieveUser = require('../db/flipdb').retrieveUser;
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index');
-});
 
 router.get('/test', function(req, res, next) {
   res.render('test' , {title: 'Express'});
 });
-
 
 router.post('/register', function(req, res, next){
   if(!req.body.username || !req.body.password){
@@ -32,7 +27,6 @@ router.post('/register', function(req, res, next){
 
   insertData(objToSave, function (err){
     if(err){ return next(err); }
-
     return res.json({
       //token: user.generateJWT(),
       status: 200
