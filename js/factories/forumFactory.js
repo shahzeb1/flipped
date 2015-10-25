@@ -10,5 +10,20 @@ forumFactory.$inject = ['$http'];
 forumFactory = function($http){
     var forum ={};
 
+    //get problem
+    forum.getProblem = function(problemId){
+        return $http.get('/forum',problemId).success(data){
+            return data;
+        };
+    };
+
+    //get responses for problem
+
+    //post new response
+
+
+    //post new question
+
+
     return forum;
 }

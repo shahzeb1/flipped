@@ -58,7 +58,8 @@
           </ol>
           <h2>Lecture Creator</h2>
           <br><form ng-submit="postLecture()">
-          <input type="text" class="form-control input-lg" placeholder="YouTube link" ng-model="lecture.youtube">
+            <input type="text" class="form-control input-lg" placeholder="Title" ng-model="lecture.name">
+          <input type="text" class="form-control input-lg" placeholder="YouTube link" ng-model="lecture.videoURL">
           <h3>Question:</h3>
           <input type="text" class="form-control" placeholder="Question text." ng-model="lecture.question">
           <h3>Answers:</h3>
