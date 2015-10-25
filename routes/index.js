@@ -22,16 +22,24 @@ router.get('/test', function(req, res, next) {
 router.get('/classes/:id/:teacher', function(req,res,next) {
   var classes = [];
   //
+  console.log(req.params);
   if (req.params.teacher == 1) {
-    classes = db.retrieveTeacherClass(req.query.id)
-  } else if (req.params.teacher == 0) {
-    classes = db.retrieveStudentClasses(req.query.id)
-  }
-  //add dashboard/classes page
-    return res.json({
-      status: 200,
-      classes: classes
+    console.log("at teacher");
+    db.retrieveTeacherClass(req.params.id, function (err, result) {
+      return res.json({
+        status: 200,
+        classes: result
+      });
     })
+  } else if (req.params.teacher == 0) {
+    db.retrieveStudentClasses(req.params.id, function (err, result) {
+      return res.json({
+        status: 200,
+        classes: result
+      })
+    });
+  //add dashboard/classes page
+  }
 });
 
 router.post('/register', function(req, res, next){

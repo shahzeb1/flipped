@@ -87,7 +87,21 @@ describe('Testing Routes', function() {
             });
     });
     it("get classes successfully", function(done) {
-        request(app).get('/classes').expect(200, done);
+        request(app)
+            .get('/classes/6dc391f1-84f1-4a01-8efd-e26170fd2d25/1')
+            //.send({
+            //    id: "6dc391f1-84f1-4a01-8efd-e26170fd2d25",
+            //    teacher: true
+            //})
+            .end(function(err,res) {
+                if (err) {
+                    throw err;
+                }
+                assert.equal(res.status, 200);
+                console.log(res.body.classes);
+                done();
+            })
+
     });
 
 

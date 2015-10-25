@@ -2,8 +2,8 @@ var pg = require('pg');
 var uuid = require('uuid');
 var _ = require('lodash');
 
-// var conString = "postgres://mtbsickrider:@localhost/flipped";
-var conString = "postgres://nrrivdimmwgqvq:GEcZkVLuYgUvNXiTGXGOZjGIDm@ec2-54-225-199-108.compute-1.amazonaws.com:5432/de4523arh6qhm9";
+var conString = "postgres://mtbsickrider:@localhost/flipped";
+//var conString = "postgres://nrrivdimmwgqvq:GEcZkVLuYgUvNXiTGXGOZjGIDm@ec2-54-225-199-108.compute-1.amazonaws.com:5432/de4523arh6qhm9";
 
 function test(cb){
     var client = new pg.Client(conString);
@@ -209,19 +209,20 @@ function retrieveUser(username,password, cb){
 }
 
 function retrieveTeacherClass(teacherId,cb) {
-
+    console.log("before client");
     var client = new pg.Client(conString);
-    client.on('drain', client.end.bind(client)); //disconnect client when all queries are finished
+    //client.on('drain', client.end.bind(client)); //disconnect client when all queries are finished
     client.connect(function(err) {
         if(err) {
+            console.log(err);
             return cb(err);
         }
-
+    console.log("client connected");
 
         var queryString =
-            "SELECT * from class" +
-            "WHERE teacherId = $1" +
-            "ORDER BY name";
+            "  SELECT * from class" +
+            "  WHERE teacherId = $1" +
+            "  ORDER BY name";
         console.log(queryString);
 
 
