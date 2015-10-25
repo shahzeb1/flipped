@@ -1,7 +1,6 @@
 var app = angular.module('app', [
   'ngRoute',
-  'flippedCtrl',
-  'moxtra'
+  'flippedCtrl'
 ]);
 
 app.config(['$routeProvider',
