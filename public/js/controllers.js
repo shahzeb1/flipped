@@ -32,17 +32,30 @@ app.controller('classCtrl', ['$scope', '$routeParams','auth','fClass','$location
     $scope.isTeacher = function(){
       console.log(auth.isTeacher());
       return auth.isTeacher();
-    }
+    };
 
     //console.log($scope.teacher);
     //console.log($scope.loggedInUser);
     $scope.studentAddClass = function(){
 
-    }
+    };
+
+    var returnObject= fClass.retrieveClasses(auth.currentUserId(),auth.isTeacher());
+    console.log(returnObject);
+
+    $scope.getClasses = function(){
+
+          var returnObject= fClass.retrieveClasses(auth.currentUserId(),auth.isTeacher());
+      console.log(returnObject);
+      //$scope.classList = returnObject;
+    };
+
 
     $scope.teacherAddClass = function(){
-        fClass.addClass(auth.currentUser(), $scope.class.name);
-    }
+      console.log(auth.currentUser());
+        fClass.addClass($scope.class.name, auth.currentUserId());
+        //$scope.classList.push(title);
+    };
 
   }]);
 

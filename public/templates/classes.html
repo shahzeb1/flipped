@@ -45,7 +45,7 @@
 				<div class="col-md-9"><h1>Hi there, {{loggedInUser}}.</h1></div>
 				<div class="col-md-3" style="padding-top: 30px">
 					<!-- if a student is logged in then show the following: -->
-					<button ng-hide="isTeacher()" class="btn btn-lg btn-success btn-add" data-toggle="modal" data-target=".new-class-add-student"><i class="fa fa-plus-circle"></i> Add classes</button>
+					<button ng-show="!isTeacher()" class="btn btn-lg btn-success btn-add" data-toggle="modal" data-target=".new-class-add-student"><i class="fa fa-plus-circle"></i> Add classes</button>
 					<!-- if a teacher is logged in then show the following: -->
 					<button ng-show="isTeacher()" class="btn btn-lg btn-success btn-add" data-toggle="modal" data-target=".new-class-add-teacher"><i class="fa fa-plus-circle"></i> Add classes</button>
 				</div>
@@ -124,7 +124,7 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary">Add class</button>
+				<button type="button" class="btn btn-primary" ng-click="teacherAddClass()">Add class</button>
 				</form>
 			</div>
 		</div><!-- /.modal-content -->

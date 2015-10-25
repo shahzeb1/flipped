@@ -10,7 +10,7 @@ function User(user){
     this.password = user.password;
     this.email = user.email;
     this.teacher = user.teacher;
-    this.id = uuid.v4();
+    this.id = user.id || uuid.v4();
 }
 
 

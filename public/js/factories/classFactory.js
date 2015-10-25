@@ -12,13 +12,16 @@ function classFactory($http, auth){
     fClass.addClass = function(name, userID){
         var newClass = {};
         newClass.name = name;
-        newClass.id = userID;
+        newClass.teacherId = userID;
         $http.post('/class',newClass);
     };
 
     //retrieve classes
-    fClass.retrieveClasses = function(){
-
+    fClass.retrieveClasses = function(id, teacher){
+        return $http.get('/classes/'+id+'/'+teacher).success(function(data){
+            console.log(data);
+            return data.classes;
+        });
     }
     return fClass;
 }
