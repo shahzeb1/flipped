@@ -60,4 +60,28 @@ router.post('/login', function(req, res, next){
   });
   });
 
+router.post('/class', function(req, res,next) {
+  var newClass = req.body;
+  console.log(post);
+  newClass.id = uuid.v4();
+  var text = "";
+  var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+  for( var i=0; i < 7; i++ )
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+  newClass.code = text;
+  var objToSave = {
+    tableName: "class",
+    object: newClass
+  };
+  insertData(objToSave, function(err){
+    return res.json({
+      code: newClass.code,
+      success: 200
+    });
+  });
+
+
+});
+
 module.exports = router;
