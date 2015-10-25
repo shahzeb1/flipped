@@ -1,6 +1,6 @@
 {
-  "name": "flapper-news",
-  "version": "0.0.0",
+  "name": "Flipped.",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "start": "supervisor ./bin/www",
