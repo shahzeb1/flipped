@@ -49,10 +49,10 @@ describe('Testing Routes', function() {
                     done();
                 });
     });
-    it.skip("create class successfully", function(done) {
+    it("create class successfully", function(done) {
         var newClass = {
             name: "Sexed",
-            teacherId: "6dc391f1-84f1-4a01-8efd-e26170fd2d25"
+            teacherId: "24d18c68-ecf0-4457-809f-ac02a818c27d"
         };
         request(app)
             .post('/class')
