@@ -2,23 +2,26 @@
     h3 a{
         color: black;
       }
-	.welcome{
-		margin-bottom: 40px;
-	}
-	.jumbotron{
-		cursor: pointer;
-	}
-	.jumbotron h1{
-		color: white;
-	}
-	.btn-add{
-		width: 200px;
-	}
+    .welcome{
+        margin-bottom: 40px;
+    }
+    .jumbotron{
+        cursor: pointer;
+    }
+    .jumbotron h1{
+        color: white;
+    }
+    .btn-add{
+        width: 200px;
+    }
+    .capital{
+        text-transform: capitalize;
+    }
     </style>
     <script>
-    function classClicked(id){
-    	alert('You clicked class '+id);
-    }
+    $('#myModal').on('new-class-add', function () {
+        $('#classid').focus()
+    })
     </script>
    <div class="container">
     <!-- Header -->
@@ -38,49 +41,97 @@
     <!-- Start of Content -->
     <content>
      <div class="welcome">
-     	<div class="row">
-     		<div class="col-md-9"><h1>Hi there, <strong>Shahzeb</strong>.</h1></div>
-     		<div class="col-md-3" style="padding-top: 30px">
-     			<button class="btn btn-lg btn-success btn-add"><i class="fa fa-plus-circle"></i> Add classes</button>
-     		</div>
-     	</div>
+        <div class="row">
+            <div class="col-md-9"><h1>Hi there, <span class="capital">shahzeb</span>.</h1></div>
+            <div class="col-md-3" style="padding-top: 30px">
+                <!-- if a student is logged in then show the following: -->
+                <button class="btn btn-lg btn-success btn-add" data-toggle="modal" data-target=".new-class-add-student"><i class="fa fa-plus-circle"></i> Add classes</button>
+                <!-- if a teacher is logged in then show the following: -->
+                <button class="btn btn-lg btn-success btn-add" data-toggle="modal" data-target=".new-class-add-teacher"><i class="fa fa-plus-circle"></i> Add classes</button>
+            </div>
+        </div>
      </div>
      <!-- For each class... -->
      <div class="row">
-     	<div class="col-md-4">
-     		<div class="jumbotron" onClick="classClicked(1)">
-     			<div class="jumbotron-photo"><img src="img/italy.jpg" /></div>
-     			<div class="jumbotron-contents" style="background: #3BAFDA">
-     				<h1>Italy 101</h1>
-     			</div>
-     		</div>
-     	</div>
-     	<div class="col-md-4">
-     		<div class="jumbotron" onClick="classClicked(2)">
-     			<div class="jumbotron-photo"><img src="img/math.jpg" /></div>
-     			<div class="jumbotron-contents" style="background: #3BAFDA">
-     				<h1>Math 101</h1>
-     			</div>
-     		</div>
-     	</div>
-     	<div class="col-md-4">
-     		<div class="jumbotron" onClick="classClicked(3)">
-     			<div class="jumbotron-photo"><img src="img/chemistry.jpg" /></div>
-     			<div class="jumbotron-contents" style="background: #3BAFDA">
-     				<h1>Chemistry 101</h1>
-     			</div>
-     		</div>
-     	</div>
-     	<div class="col-md-4">
-     		<div class="jumbotron" onClick="classClicked(4)">
-     			<div class="jumbotron-photo"><img src="img/physics.jpg" /></div>
-     			<div class="jumbotron-contents" style="background: #3BAFDA">
-     				<h1>Physics 101</h1>
-     			</div>
-     		</div>
-     	</div>
+        <div class="col-md-4">
+            <div class="jumbotron" onClick="classClicked(1)">
+                <div class="jumbotron-photo"><img src="img/italy.jpg" /></div>
+                <div class="jumbotron-contents" style="background: #3BAFDA">
+                    <h1>Italy 101</h1>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="jumbotron" onClick="classClicked(2)">
+                <div class="jumbotron-photo"><img src="img/math.jpg" /></div>
+                <div class="jumbotron-contents" style="background: #3BAFDA">
+                    <h1>Math 101</h1>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="jumbotron" onClick="classClicked(3)">
+                <div class="jumbotron-photo"><img src="img/chemistry.jpg" /></div>
+                <div class="jumbotron-contents" style="background: #3BAFDA">
+                    <h1>Chemistry 101</h1>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="jumbotron" onClick="classClicked(4)">
+                <div class="jumbotron-photo"><img src="img/physics.jpg" /></div>
+                <div class="jumbotron-contents" style="background: #3BAFDA">
+                    <h1>Physics 101</h1>
+                </div>
+            </div>
+        </div>
      </div>
- </div>
+ </div> 
+
+ <!-- modal -->
+ <div class="modal fade new-class-add-student">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Adding a class as a student:</h4>
+      </div>
+      <div class="modal-body">
+        <form ng-submit="studentAddClass()">
+        <input type="text" class="input-group input-lg" id="classid" placeholder="Class ID" style="width: 100%" ng-model="student.classId"><br>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Add class</button>
+        </form>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+ <!-- modal -->
+ <div class="modal fade new-class-add-teacher">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Adding a class as a teacher:</h4>
+      </div>
+      <div class="modal-body">
+        <form ng-submit="teacherAddClass()">
+        <input type="text" class="input-group input-lg" placeholder="Class ID" style="width: 100%" ng-model="teacher.classTitle"><br>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Add class</button>
+        </form>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
     </content>
   </div>
   <!-- End of container -->
