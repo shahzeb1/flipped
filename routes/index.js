@@ -99,7 +99,6 @@ router.post('/class', function(req, res,next) {
     tableName: "class",
     object: newClass
   };
-  console.log("before saving");
   insertData(objToSave, function(err){
     return res.json({
       code: newClass.code,
@@ -107,6 +106,29 @@ router.post('/class', function(req, res,next) {
     });
   });
 });
+
+router.post('/registerclass', function(req, res,next) {
+  console.log(req.body);
+  db.retrieveClassId(req.body.code, function(err, fClass) {
+    var obj = {
+      classId: fClass.id,
+      appUserId: req.body.id
+    };
+    var objToSave = {
+      tableName: "appUserClass",
+      object: obj
+    };
+    insertData(objToSave, function(err){
+      return res.json({
+        success: 200
+      });
+    });
+  });
+});
+
+
+
+
 
 //need to figure out how to save a file when we do this
 router.post('/class/:class/lecture', function(req, res,next) {

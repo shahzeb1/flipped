@@ -86,14 +86,14 @@ describe('Testing Routes', function() {
                 done();
             });
     });
-    it("get classes successfully", function(done) {
+    it.skip("get classes successfully", function(done) {
         request(app)
             .get('/classes/6dc391f1-84f1-4a01-8efd-e26170fd2d25/1')
             //.send({
             //    id: "6dc391f1-84f1-4a01-8efd-e26170fd2d25",
             //    teacher: true
             //})
-            .end(function(err,res) {
+            .end(function (err, res) {
                 if (err) {
                     throw err;
                 }
@@ -101,9 +101,22 @@ describe('Testing Routes', function() {
                 console.log(res.body.classes);
                 done();
             })
-
     });
-
-
-
+    it.skip("register for class successfully", function(done) {
+        var obj = {
+            id: "a95475c3-9aaf-4a59-b413-853f7f648c0f",
+            code: "EwzVVbr"
+        };
+        request(app)
+            .post('/registerclass')
+            .send(obj)
+            // end handles the response
+            .end(function(err, res) {
+                if (err) {
+                    throw err;
+                }
+                assert.equal(res.status, 200);
+                done();
+            });
+    });
 });

@@ -211,7 +211,7 @@ function retrieveUser(username,password, cb){
 function retrieveTeacherClass(teacherId,cb) {
     console.log("before client");
     var client = new pg.Client(conString);
-    //client.on('drain', client.end.bind(client)); //disconnect client when all queries are finished
+    client.on('drain', client.end.bind(client)); //disconnect client when all queries are finished
     client.connect(function(err) {
         if(err) {
             console.log(err);
@@ -267,9 +267,38 @@ function retrieveStudentClasses(studentId,cb) {
     });
 }
 
+function retrieveClassId(classCode, cb) {
+    var client = new pg.Client(conString);
+    client.on('drain', client.end.bind(client)); //disconnect client when all queries are finished
+    client.connect(function(err) {
+        if(err) {
+            console.log(err);
+            return cb(err);
+        }
+        console.log("client connected");
+
+        var queryString =
+            "  SELECT * from class" +
+            "  WHERE code = $1";
+        console.log(queryString);
+
+
+        client.query(queryString, [classCode], function(err , results) {
+            if(err) {
+                console.log(err);
+                return cb(err);
+            }
+            client.end();
+            cb(null,results.rows[0])
+        });
+    });
+
+}
+
 module.exports.test =  test;
 module.exports.insertData =  insertData;
 module.exports.selectData =  selectData;
 module.exports.retrieveUser = retrieveUser;
 module.exports.retrieveTeacherClass = retrieveTeacherClass;
 module.exports.retrieveStudentClasses = retrieveStudentClasses;
+module.exports.retrieveClassId = retrieveClassId;
