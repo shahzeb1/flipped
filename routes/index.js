@@ -8,6 +8,8 @@ var uuid = require('uuid');
 var User = require('../db/helper').User;
 var insertData = require('../db/flipdb').insertData;
 var retrieveUser = require('../db/flipdb').retrieveUser;
+var db = require('../db/flipdb');
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index');
@@ -17,11 +19,25 @@ router.get('/test', function(req, res, next) {
   res.render('test' , {title: 'Express'});
 });
 
+router.get('/classes/:id/:teacher', function(req,res,next) {
+  var classes = [];
+  if (req.params.teacher == 1) {
+    classes = db.retrieveTeacherClass(req.query.id)
+  } else if (req.params.teacher == 0) {
+    classes = db.retrieveStudentClasses(req.query.id)
+  }
+  //add dashboard/classes page
+    return res.json({
+      status: 200,
+      classes: classes
+    })
+});
 
 router.post('/register', function(req, res, next){
   if(!req.body.username || !req.body.password){
     return res.status(400).json({message: 'Please fill out all fields'});
   }
+  console.log(req.body);
 
   var user = new User(req.body);
 
