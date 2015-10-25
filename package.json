@@ -22,7 +22,8 @@
     "passport-local": "^1.0.0",
     "serve-favicon": "~2.3.0",
     "uuid": "^2.0.1",
-    "supervisor": "*"
+    "supervisor": "*",
+    "pg": "*"
   },
   "devDependencies": {
     "mocha": "*",
