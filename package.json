@@ -25,7 +25,8 @@
     "uuid": "^2.0.1",
     "supervisor": "*",
     "pg": "*",
-    "twilio": "*"
+    "twilio": "*",
+    "async": "*"
   },
   "devDependencies": {
     "mocha": "*",

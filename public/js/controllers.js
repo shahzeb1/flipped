@@ -96,6 +96,11 @@ app.controller('signupCtrl', ['$scope', '$routeParams','auth','$location',
 
   }]);
 
+app.controller('streamCtrl', ['$scope', '$routeParams','auth','$location',
+  function($scope, $routeParams, auth, $location) {
+    $scope.classId = $routeParams.id;
+  }]);
+
 app.controller('loginCtrl', ['$scope', '$routeParams','auth','$location',
   function($scope, $routeParams, auth, $location) {
     $scope.user = {};
