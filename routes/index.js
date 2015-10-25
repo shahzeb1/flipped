@@ -4,6 +4,7 @@ var jwt = require('express-jwt');
 var auth = jwt({secret: 'SECRET', userProperty: 'payload'});
 var uuid = require('uuid');
 
+
 //local Variables
 var User = require('../db/helper').User;
 var insertData = require('../db/flipdb').insertData;
@@ -74,6 +75,7 @@ router.post('/login', function(req, res, next){
     if(err){ return next(err); }
 
     if(user){
+      console.log(user);
       var newUser = new User(user);
       return res.json({
         user: newUser,
@@ -130,20 +132,16 @@ router.post('/registerclass', function(req, res,next) {
 
 
 
-//need to figure out how to save a file when we do this
+//create lecture, get its id
+//create problem
+//create answers
 router.post('/class/:class/lecture', function(req, res,next) {
   var lecture = req.body;
   console.log(lecture);
   lecture.id = uuid.v4();
 
-  var objToSave = {
-    tableName: "lecture",
-    object: lecture
-  };
-  console.log("before saving");
-  insertData(objToSave, function(err){
+  db.saveLecture(lecture, function(err) {
     return res.json({
-      lecture: lecture,
       success: 200
     });
   });

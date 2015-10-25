@@ -1,6 +1,7 @@
 var pg = require('pg');
 var uuid = require('uuid');
 var _ = require('lodash');
+var async = require('async');
 
 var conString = "postgres://mtbsickrider:@localhost/flipped";
 //var conString = "postgres://nrrivdimmwgqvq:GEcZkVLuYgUvNXiTGXGOZjGIDm@ec2-54-225-199-108.compute-1.amazonaws.com:5432/de4523arh6qhm9";
@@ -292,7 +293,89 @@ function retrieveClassId(classCode, cb) {
             cb(null,results.rows[0])
         });
     });
+}
 
+function saveLecture(lecture , done){
+
+    var client = new pg.Client(conString);
+    client.on('drain', client.end.bind(client)); //disconnect client when all queries are finished
+    client.connect(function(err) {
+        if(err) {
+            return cb(err);
+        }
+
+        async.series([
+            function saveLecture(cb) {
+                var queryString =
+                    "  INSERT INTO lecture" +
+                    "  (id, name, classId, videoUrl)" +
+                    "  VALUES ($1, $2, $3, $4, $5)";
+
+
+                client.query(queryString, [lecture.id, lecture.name, lecture.classId, lecture.videoUrl], function(err) {
+                    if(err) {
+                        console.log(err);
+                        return cb(err);
+                    }
+                    cb(null)
+                });
+            },
+            function saveProblems(cb) {
+                for (i =0; i< lecture.problems.length; i++) {
+                    var queryString =
+                        "  INSERT INTO problem" +
+                        "  (id, lectureId, problemType, question)" +
+                        "  VALUES ($1, $2, $3, $4)";
+
+
+                    client.query(queryString, [i ,lecture.id, lecture.problem[i].problemType, lecture.problem[i].question], function(err) {
+                        if(err) {
+                            console.log(err);
+                            return cb(err);
+                        }
+                        //time to move on
+                        if (i== lecture.problems.length-1) {
+                            cb(null)
+                        }
+                    });
+                }
+            },
+            function saveAnswers(cb) {
+
+                for (i = 0; i < lecture.problems.length; i++) {
+                    for (j = 0; j < lecture.problems.answers.length; j++) {
+                        var queryString =
+                            "  INSERT INTO problemAnswer" +
+                            "  (id, problemId, lectureId, possibleAnswer, correctAnswer)" +
+                            "  VALUES ($1, $2, $3, $4, $5)";
+
+
+                        client.query(queryString, [j, i, lecture.problem[i].lectureId, lecture.problem[i].answer[j].possibleAnswer, lecture.problem[i].answer[j].correctAnswer], function (err) {
+                            if (err) {
+                                console.log(err);
+                                return cb(err);
+                            }
+                            //time to move on
+                            if (i == lecture.problems.length - 1 && j == lecture.problems.answers.length - 1) {
+                                cb(null)
+                            }
+                        });
+                    }
+                }
+            }
+        ] , function (err, results) {
+            if (err) {
+                return done(err)
+            }
+            done();
+        });
+
+
+
+
+
+
+    });
 }
 
 module.exports.test =  test;
@@ -302,3 +385,4 @@ module.exports.retrieveUser = retrieveUser;
 module.exports.retrieveTeacherClass = retrieveTeacherClass;
 module.exports.retrieveStudentClasses = retrieveStudentClasses;
 module.exports.retrieveClassId = retrieveClassId;
+module.exports.saveLecture = saveLecture;
