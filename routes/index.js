@@ -81,8 +81,25 @@ router.post('/class', function(req, res,next) {
       success: 200
     });
   });
+});
 
+//need to figure out how to save a file when we do this
+router.post('/class/:class/lecture', function(req, res,next) {
+  var lecture = req.body;
+  console.log(lecture);
+  lecture.id = uuid.v4();
 
+  var objToSave = {
+    tableName: "lecture",
+    object: lecture
+  };
+  console.log("before saving");
+  insertData(objToSave, function(err){
+    return res.json({
+      lecture: lecture,
+      success: 200
+    });
+  });
 });
 
 module.exports = router;

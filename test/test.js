@@ -65,5 +65,24 @@ describe('Testing Routes', function() {
                 assert.isNotNull(res.code, "should of created a code");
                 done();
             });
+    });
+
+    it("create lecture successfully", function(done) {
+        var lecture = {
+            name: "Condoms",
+            classId: "bd7c51a5-367c-444c-9cf5-1ce712c67eba",
+            videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        };
+        request(app)
+            .post('/class/bd7c51a5-367c-444c-9cf5-1ce712c67eba/lecture')
+            .send(lecture)
+            // end handles the response
+            .end(function(err, res) {
+                if (err) {
+                    throw err;
+                }
+                assert.equal(res.status, 200);
+                done();
+            });
     })
 });
