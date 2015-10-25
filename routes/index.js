@@ -4,6 +4,7 @@ var jwt = require('express-jwt');
 var auth = jwt({secret: 'SECRET', userProperty: 'payload'});
 var uuid = require('uuid');
 
+
 //local Variables
 var User = require('../db/helper').User;
 var insertData = require('../db/flipdb').insertData;
@@ -11,28 +12,33 @@ var retrieveUser = require('../db/flipdb').retrieveUser;
 var db = require('../db/flipdb');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index');
-});
-
-router.get('/test', function(req, res, next) {
-  res.render('test' , {title: 'Express'});
-});
+// router.get('/', function(req, res, next) {
+//   res.render('index');
+// });
 
 router.get('/classes/:id/:teacher', function(req,res,next) {
   var classes = [];
   //
+  console.log(req.params);
   if (req.params.teacher == 1) {
-    classes = db.retrieveTeacherClass(req.query.id)
-  } else if (req.params.teacher == 0) {
-    classes = db.retrieveStudentClasses(req.query.id)
-  }
-  //add dashboard/classes page
-    return res.json({
-      status: 200,
-      classes: classes
+    console.log("at teacher");
+    db.retrieveTeacherClass(req.params.id, function (err, result) {
+      return res.json({
+        status: 200,
+        classes: result
+      });
     })
+  } else if (req.params.teacher == 0) {
+    db.retrieveStudentClasses(req.params.id, function (err, result) {
+      return res.json({
+        status: 200,
+        classes: result
+      })
+    });
+  //add dashboard/classes page
+  }
 });
+
 
 router.post('/register', function(req, res, next){
   if(!req.body.username || !req.body.password){
@@ -49,7 +55,6 @@ router.post('/register', function(req, res, next){
 
   insertData(objToSave, function (err){
     if(err){ return next(err); }
-
     return res.json({
       //token: user.generateJWT(),
       status: 200
@@ -66,6 +71,7 @@ router.post('/login', function(req, res, next){
     if(err){ return next(err); }
 
     if(user){
+      console.log(user);
       var newUser = new User(user);
       return res.json({
         user: newUser,
@@ -91,7 +97,6 @@ router.post('/class', function(req, res,next) {
     tableName: "class",
     object: newClass
   };
-  console.log("before saving");
   insertData(objToSave, function(err){
     return res.json({
       code: newClass.code,
@@ -100,20 +105,39 @@ router.post('/class', function(req, res,next) {
   });
 });
 
-//need to figure out how to save a file when we do this
+router.post('/registerclass', function(req, res,next) {
+  console.log(req.body);
+  db.retrieveClassId(req.body.code, function(err, fClass) {
+    var obj = {
+      classId: fClass.id,
+      appUserId: req.body.id
+    };
+    var objToSave = {
+      tableName: "appUserClass",
+      object: obj
+    };
+    insertData(objToSave, function(err){
+      return res.json({
+        success: 200
+      });
+    });
+  });
+});
+
+
+
+
+
+//create lecture, get its id
+//create problem
+//create answers
 router.post('/class/:class/lecture', function(req, res,next) {
   var lecture = req.body;
   console.log(lecture);
   lecture.id = uuid.v4();
 
-  var objToSave = {
-    tableName: "lecture",
-    object: lecture
-  };
-  console.log("before saving");
-  insertData(objToSave, function(err){
+  db.saveLecture(lecture, function(err) {
     return res.json({
-      lecture: lecture,
       success: 200
     });
   });
