@@ -12,7 +12,7 @@ forumFactory = function($http){
 
     //get problem
     forum.getProblem = function(problemId){
-        return $http.get('/forum',problemId).success(data){
+        return $http.get('/forum/'+problemId).success(data){
             return data;
         };
     };
