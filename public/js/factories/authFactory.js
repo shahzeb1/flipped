@@ -79,11 +79,15 @@
             return $http.post('/login', user).success(function(data){
                 //console.log(data);
                 auth.saveToken(data.token);
+                console.log(data);
                 auth.saveUserObject(data.user);
             });
         };
         auth.logOut = function(){
             $window.localStorage.removeItem('flipped-token');
+            $window.localStorage.removeItem('user-name');
+            $window.localStorage.removeItem('user-id');
+            $window.localStorage.removeItem('user-teacher');
         };
         return auth;
     };
