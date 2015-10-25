@@ -15,9 +15,6 @@ router.get('/', function(req, res, next) {
   res.render('index');
 });
 
-router.get('/test', function(req, res, next) {
-  res.render('test' , {title: 'Express'});
-});
 
 router.get('/classes/:id/:teacher', function(req,res,next) {
   var classes = [];

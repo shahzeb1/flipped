@@ -111,12 +111,25 @@ app.controller('makeCtrl', ['$scope', '$routeParams','lectureMake',
     }
   }]);
 
-app.controller('shoutoutCtrl', ['$scope', '$routeParams',
-  function($scope, $routeParams) {
+app.controller('shoutoutCtrl', ['$scope', '$routeParams', '$http',
+  function($scope, $routeParams, $http) {
     $scope.classId = $routeParams.classId;
     // When the submit text message button is clicked
     $scope.sendText = function(){
-      alert("You called me");
+      
+      var textVal = $("textarea#textMessage").val();
+      $http({
+      method: 'POST',
+      url: '/text',
+      data: {text: textVal}
+      }).then(function successCallback(response) {
+        $("#form").hide();
+        $("#success").fadeIn("slow");
+      }, function errorCallback(response) {
+        console.log('error');
+        console.log(response);
+    });
+
     }
     
   }]);
