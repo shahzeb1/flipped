@@ -1,0 +1,86 @@
+    <style>
+    h3 a{
+        color: black;
+      }
+	.welcome{
+		margin-bottom: 40px;
+	}
+	.jumbotron{
+		cursor: pointer;
+	}
+	.jumbotron h1{
+		color: white;
+	}
+	.btn-add{
+		width: 200px;
+	}
+    </style>
+    <script>
+    function classClicked(id){
+    	alert('You clicked class '+id);
+    }
+    </script>
+   <div class="container">
+    <!-- Header -->
+    <header>
+     <div class="row">
+      <div class="col-md-9"><h3><a href="#/">flipped.</a></h3></div>
+      <div class="col-md-3" style="padding-top: 30px">
+                    <div class="btn-group">
+            <button type="button" class="btn btn-primary btn-lg"><i class="fa fa-home"></i></button>
+            <button type="button" class="btn btn-primary btn-lg"><i class="fa fa-user"></i></button>
+            <button type="button" class="btn btn-primary btn-lg"><i class="fa fa-comment"></i></button>
+            <button type="button" class="btn btn-primary btn-lg"><i class="fa fa-sign-out"></i></button>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- Start of Content -->
+    <content>
+     <div class="welcome">
+     	<div class="row">
+     		<div class="col-md-9"><h1>Hi there, <strong>Shahzeb</strong>.</h1></div>
+     		<div class="col-md-3" style="padding-top: 30px">
+     			<button class="btn btn-lg btn-success btn-add"><i class="fa fa-plus-circle"></i> Add classes</button>
+     		</div>
+     	</div>
+     </div>
+     <!-- For each class... -->
+     <div class="row">
+     	<div class="col-md-4">
+     		<div class="jumbotron" onClick="classClicked(1)">
+     			<div class="jumbotron-photo"><img src="img/italy.jpg" /></div>
+     			<div class="jumbotron-contents" style="background: #3BAFDA">
+     				<h1>Italy 101</h1>
+     			</div>
+     		</div>
+     	</div>
+     	<div class="col-md-4">
+     		<div class="jumbotron" onClick="classClicked(2)">
+     			<div class="jumbotron-photo"><img src="img/math.jpg" /></div>
+     			<div class="jumbotron-contents" style="background: #3BAFDA">
+     				<h1>Math 101</h1>
+     			</div>
+     		</div>
+     	</div>
+     	<div class="col-md-4">
+     		<div class="jumbotron" onClick="classClicked(3)">
+     			<div class="jumbotron-photo"><img src="img/chemistry.jpg" /></div>
+     			<div class="jumbotron-contents" style="background: #3BAFDA">
+     				<h1>Chemistry 101</h1>
+     			</div>
+     		</div>
+     	</div>
+     	<div class="col-md-4">
+     		<div class="jumbotron" onClick="classClicked(4)">
+     			<div class="jumbotron-photo"><img src="img/physics.jpg" /></div>
+     			<div class="jumbotron-contents" style="background: #3BAFDA">
+     				<h1>Physics 101</h1>
+     			</div>
+     		</div>
+     	</div>
+     </div>
+ </div>
+    </content>
+  </div>
+  <!-- End of container -->

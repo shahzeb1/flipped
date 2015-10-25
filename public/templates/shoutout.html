@@ -1,0 +1,69 @@
+      <style>
+      h1{
+        text-align: center;
+      }
+      h3 a{
+        color: black;
+      }
+      header{
+        margin-top: 30px;
+      }
+      h2{
+        text-align: center;
+      }
+      form{
+        margin-bottom: 50px;
+      }
+      input{
+        width: 100%;
+      }
+      .form-control{
+        margin-bottom: 10px;
+      }
+      .shoutout-btn{
+        width: 100%;
+        margin-top: 20px;
+        background: #A0D468;
+        border: #A0D468;
+        font-size: 30pt;
+      }
+      .shoutout-btn:hover{
+        background: #8CC152;
+      }
+      .content{
+        padding-top: 150px;
+        min-height: 600px;
+      }
+      </style>
+      <div class="container">
+        <!-- Header -->
+        <header>
+         <div class="row">
+          <div class="col-md-9"><h3><a href="#/">flipped.</a></h3></div>
+          <div class="col-md-3" style="padding-top: 30px">
+           <div class="btn-group">
+            <button type="button" class="btn btn-primary btn-lg"><i class="fa fa-home"></i></button>
+            <button type="button" class="btn btn-primary btn-lg"><i class="fa fa-user"></i></button>
+            <button type="button" class="btn btn-primary btn-lg"><i class="fa fa-comment"></i></button>
+            <button type="button" class="btn btn-primary btn-lg"><i class="fa fa-sign-out"></i></button>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- Start of Content -->
+    <content>
+      <!-- Breadcrums -->
+        <ol class="breadcrumb" style="margin-top: 20px">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Math 101</a></li>
+          <li class="active">Shoutout for #{{classId}}</li>
+        </ol>
+      <div class="content">
+        <h1>Sending shoutout to 11 students.</h1>
+        <form ng-submit="sendText()">
+        <textarea class="form-control" rows="3" style="resize: none;">Enter a text message which will be broadcast to the whole class.</textarea>
+        <button class="btn btn-primary btn-lg fa-5x shoutout-btn"><i class="fa fa-envelope-o"></i></button>
+        </form>
+      </div>
+    </content>
+  </div>
