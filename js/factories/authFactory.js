@@ -38,6 +38,11 @@
                 return payload.username;
             }
         };
+        //returns whether the current user is a teacher
+        auth.isTeacher = function(){
+            return auth.currentUser().teacher;
+        };
+
         auth.register = function(user){
             return $http.post('/register', user).success(function(data){
                 auth.saveToken(data.token);
