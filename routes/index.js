@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var jwt = require('express-jwt');
 var auth = jwt({secret: 'SECRET', userProperty: 'payload'});
-
+var uuid = require('uuid');
 
 //local Variables
 var User = require('../db/helper').User;
@@ -59,5 +59,47 @@ router.post('/login', function(req, res, next){
     }
   });
   });
+
+router.post('/class', function(req, res,next) {
+  var newClass = req.body;
+  console.log(newClass);
+  newClass.id = uuid.v4();
+  var text = "";
+  var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+  for( var i=0; i < 7; i++ )
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+  newClass.code = text;
+  var objToSave = {
+    tableName: "class",
+    object: newClass
+  };
+  console.log("before saving");
+  insertData(objToSave, function(err){
+    return res.json({
+      code: newClass.code,
+      success: 200
+    });
+  });
+});
+
+//need to figure out how to save a file when we do this
+router.post('/class/:class/lecture', function(req, res,next) {
+  var lecture = req.body;
+  console.log(lecture);
+  lecture.id = uuid.v4();
+
+  var objToSave = {
+    tableName: "lecture",
+    object: lecture
+  };
+  console.log("before saving");
+  insertData(objToSave, function(err){
+    return res.json({
+      lecture: lecture,
+      success: 200
+    });
+  });
+});
 
 module.exports = router;
