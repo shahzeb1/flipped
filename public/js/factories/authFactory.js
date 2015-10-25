@@ -23,6 +23,7 @@
             var token = auth.getToken();
 
             if(token){
+                //console.log(token);
                 var payload = JSON.parse($window.atob(token.split('.')[1]));
 
                 return payload.exp > Date.now() / 1000;
@@ -40,6 +41,7 @@
         };
         auth.register = function(user){
             return $http.post('/register', user).success(function(data){
+                //console.log(data.token);
                 auth.saveToken(data.token);
             });
         };

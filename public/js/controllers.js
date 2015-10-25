@@ -4,9 +4,18 @@ app.controller('lectureCtrl', ['$scope', '$routeParams',
     $scope.classId = $routeParams.classId;
   }]);
 
-app.controller('classCtrl', ['$scope', '$routeParams',
+
+app.controller('homeCtrl', ['$scope', '$routeParams',
   function($scope, $routeParams) {
+    //$scope.classId = $routeParams.id;
+  }]);
+
+app.controller('classCtrl', ['$scope', '$routeParams','auth',
+  function($scope, $routeParams,auth) {
     $scope.classId = $routeParams.id;
+    $scope.loggedInUser = auth.currentUser();
+    //console.log($scope.loggedInUser);
+
   }]);
 
 app.controller('streamCtrl', ['$scope', '$routeParams',
@@ -36,7 +45,7 @@ app.controller('signupCtrl', ['$scope', '$routeParams','auth','$location',
       auth.register($scope.user).error(function(error){
         $scope.error = error;
       }).then(function(){
-        $location.path('/class');
+        $location.path('/login');
       });
     }
 

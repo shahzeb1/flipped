@@ -36,10 +36,10 @@
       </div>
     </header>
     <!-- Start of Content -->
-    <content>
+    <content ng-controller="classCtrl">
      <div class="welcome">
      	<div class="row">
-     		<div class="col-md-9"><h1>Hi there, <strong>Shahzeb</strong>.</h1></div>
+     		<div class="col-md-9"><h1>Hi there, {{loggedInUser}}.</h1></div>
      		<div class="col-md-3" style="padding-top: 30px">
      			<button class="btn btn-lg btn-success btn-add"><i class="fa fa-plus-circle"></i> Add classes</button>
      		</div>
