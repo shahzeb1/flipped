@@ -21,6 +21,7 @@ router.get('/test', function(req, res, next) {
 
 router.get('/classes/:id/:teacher', function(req,res,next) {
   var classes = [];
+  //
   if (req.params.teacher == 1) {
     classes = db.retrieveTeacherClass(req.query.id)
   } else if (req.params.teacher == 0) {
