@@ -2,7 +2,8 @@ var pg = require('pg');
 var uuid = require('uuid');
 var _ = require('lodash');
 
-var conString = "postgres://mtbsickrider:@localhost/flipped";
+// var conString = "postgres://mtbsickrider:@localhost/flipped";
+var conString = "postgres://nrrivdimmwgqvq:GEcZkVLuYgUvNXiTGXGOZjGIDm@ec2-54-225-199-108.compute-1.amazonaws.com:5432/de4523arh6qhm9";
 
 function test(cb){
     var client = new pg.Client(conString);
