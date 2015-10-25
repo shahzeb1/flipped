@@ -12,9 +12,9 @@ describe('Testing Routes', function() {
 
     it.skip("posts successfully", function(done) {
         var tu = {
-            username: "teacher",
+            username: "teacher1",
             password: "test",
-            email: "teacher@gmail.com",
+            email: "teacher1@gmail.com",
             teacher: true
         };
         request(app)
@@ -25,6 +25,7 @@ describe('Testing Routes', function() {
                 if (err) {
                     throw err;
                 }
+                console.log(res);
                 assert.equal(res.status, 200);
                 done();
             });
@@ -48,7 +49,7 @@ describe('Testing Routes', function() {
                     done();
                 });
     });
-    it("create class successfully", function(done) {
+    it.skip("create class successfully", function(done) {
         var newClass = {
             name: "Sexed",
             teacherId: "6dc391f1-84f1-4a01-8efd-e26170fd2d25"
@@ -67,7 +68,7 @@ describe('Testing Routes', function() {
             });
     });
 
-    it("create lecture successfully", function(done) {
+    it.skip("create lecture successfully", function(done) {
         var lecture = {
             name: "Condoms",
             classId: "bd7c51a5-367c-444c-9cf5-1ce712c67eba",
@@ -84,5 +85,11 @@ describe('Testing Routes', function() {
                 assert.equal(res.status, 200);
                 done();
             });
-    })
+    });
+    it("get classes successfully", function(done) {
+        request(app).get('/classes').expect(200, done);
+    });
+
+
+
 });

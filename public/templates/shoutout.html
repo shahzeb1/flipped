@@ -59,11 +59,16 @@
           <li class="active">Shoutout for #{{classId}}</li>
         </ol>
       <div class="content">
+       <div id="form">
         <h1>Sending shoutout to 11 students.</h1>
-        <form ng-submit="sendText()">
-        <textarea class="form-control" rows="3" style="resize: none;">Enter a text message which will be broadcast to the whole class.</textarea>
-        <button class="btn btn-primary btn-lg fa-5x shoutout-btn"><i class="fa fa-envelope-o"></i></button>
-        </form>
+          <form ng-submit="sendText()">
+          <textarea class="form-control" rows="3" style="resize: none;" id="textMessage" placeholder="Enter a text message which will be broadcast to the whole class."></textarea>
+          <button class="btn btn-primary btn-lg fa-5x shoutout-btn"><i class="fa fa-envelope-o"></i></button>
+          </form>
+        </div>
+        <div id="success" style="display:none;">
+          <h1>Your text shoutout has been sent! <br> <i class="fa fa-smile-o fa-5x" style="color: #A0D468;"></i></h1>
+        </div>
       </div>
     </content>
   </div>
