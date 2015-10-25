@@ -1,7 +1,14 @@
-app.controller('lectureCtrl', ['$scope', '$routeParams',
-  function($scope, $routeParams) {
+app.controller('lectureCtrl', ['$scope', '$routeParams','$location',
+  function($scope, $routeParams, $location) {
+    $scope.lectureList = ['Lecture 1', 'Lecture 2', 'Lecture 3'];
     $scope.lectureId = $routeParams.lectureId;
     $scope.classId = $routeParams.classId;
+
+    $scope.lectureClick = function(lectureTitle){
+      //console.log(classTitle);
+
+      $location.path('/lecture/'+$scope.classId+'/'+lectureTitle);
+    }
   }]);
 
 
@@ -10,11 +17,32 @@ app.controller('homeCtrl', ['$scope', '$routeParams',
     //$scope.classId = $routeParams.id;
   }]);
 
-app.controller('classCtrl', ['$scope', '$routeParams','auth',
-  function($scope, $routeParams,auth) {
+app.controller('classCtrl', ['$scope', '$routeParams','auth','fClass','$location',
+  function($scope, $routeParams,auth,fClass,$location) {
+    $scope.classList = ["Math1","Math2","Math3"];
+
+    $scope.classClick = function(classTitle){
+      //console.log(classTitle);
+
+      $location.path('/lecture/'+classTitle);
+    }
+
     $scope.classId = $routeParams.id;
     $scope.loggedInUser = auth.currentUser();
+    $scope.isTeacher = function(){
+      console.log(auth.isTeacher());
+      return auth.isTeacher();
+    }
+
+    //console.log($scope.teacher);
     //console.log($scope.loggedInUser);
+    $scope.studentAddClass = function(){
+
+    }
+
+    $scope.teacherAddClass = function(){
+        fClass.addClass(auth.currentUser(), $scope.class.name);
+    }
 
   }]);
 
