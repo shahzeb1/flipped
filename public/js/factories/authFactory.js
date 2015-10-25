@@ -17,7 +17,7 @@
         };
 
         auth.saveUserObject = function(user){
-            //console.log(user);
+            console.log(user);
             $window.localStorage['user-name'] = user.username;
             $window.localStorage['user-id'] = user.id;
             $window.localStorage['user-teacher'] = user.teacher;

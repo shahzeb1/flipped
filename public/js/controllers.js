@@ -104,7 +104,7 @@ app.controller('loginCtrl', ['$scope', '$routeParams','auth','$location',
       auth.logIn($scope.user).error(function(error){
         $scope.error = error;
       }).then(function(){
-        if(user.teacher){
+        if(auth.isTeacher()){
           $location.path('/make/1');
         }else{
           $location.path('/class');
