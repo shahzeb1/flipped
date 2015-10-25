@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var jwt = require('express-jwt');
 var auth = jwt({secret: 'SECRET', userProperty: 'payload'});
-
+var uuid = require('uuid');
 
 //local Variables
 var User = require('../db/helper').User;
@@ -62,7 +62,7 @@ router.post('/login', function(req, res, next){
 
 router.post('/class', function(req, res,next) {
   var newClass = req.body;
-  console.log(post);
+  console.log(newClass);
   newClass.id = uuid.v4();
   var text = "";
   var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -74,6 +74,7 @@ router.post('/class', function(req, res,next) {
     tableName: "class",
     object: newClass
   };
+  console.log("before saving");
   insertData(objToSave, function(err){
     return res.json({
       code: newClass.code,

@@ -47,8 +47,11 @@ function parametrize(object) {
 
 function insertData(info,cb){
     var client = new pg.Client(conString);
+    console.log("client created");
     client.connect(function(err) {
+        console.log("client connected");
         if(err) {
+            console.log(err);
             return cb(err);
         }
 
