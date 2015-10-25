@@ -1,5 +1,6 @@
 /**
  * Created by lschubert on 10/24/15.
+ * used for authentication for login and signup
  */
 
     'use strict';

@@ -62,12 +62,15 @@ app.controller('forumCtrl', ['$scope', '$routeParams',
     $scope.questionId = $routeParams.questionId;
   }]);
 
-app.controller('makeCtrl', ['$scope', '$routeParams',
-  function($scope, $routeParams) {
+app.controller('makeCtrl', ['$scope', '$routeParams','lectureMake',
+  function($scope, $routeParams, lectureMake) {
     $scope.lecture = {};
     $scope.classId = $routeParams.classId;
     $scope.postLecture = function(){
       alert("You called me");
+      lectureMake.submitLecture($scope.lecture);
+
+
     }
   }]);
 
