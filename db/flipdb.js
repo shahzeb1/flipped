@@ -136,7 +136,6 @@ function retrieveUser(username,password, cb){
     var client = new pg.Client(conString);
     client.connect(function(err) {
         if(err) {
-            console.log(err);
             return cb(err);
         }
 
