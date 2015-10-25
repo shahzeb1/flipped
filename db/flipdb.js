@@ -3,7 +3,7 @@ var uuid = require('uuid');
 var _ = require('lodash');
 var async = require('async');
 
-var conString = "postgres://mtbsickrider:@localhost/flipped";
+var conString = "postgres://xbyevtqd:J-RzIZlrN4lLZF4Uzwh8Y8vZaC482fy5@pellefant.db.elephantsql.com:5432/xbyevtqd";
 
 function test(cb){
     var client = new pg.Client(conString);
