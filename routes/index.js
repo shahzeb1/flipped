@@ -12,13 +12,9 @@ var retrieveUser = require('../db/flipdb').retrieveUser;
 var db = require('../db/flipdb');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index');
-});
-
-router.get('/test', function(req, res, next) {
-  res.render('test' , {title: 'Express'});
-});
+// router.get('/', function(req, res, next) {
+//   res.render('index');
+// });
 
 router.get('/classes/:id/:teacher', function(req,res,next) {
   var classes = [];
@@ -43,6 +39,7 @@ router.get('/classes/:id/:teacher', function(req,res,next) {
   }
 });
 
+
 router.post('/register', function(req, res, next){
   if(!req.body.username || !req.body.password){
     return res.status(400).json({message: 'Please fill out all fields'});
@@ -58,7 +55,6 @@ router.post('/register', function(req, res, next){
 
   insertData(objToSave, function (err){
     if(err){ return next(err); }
-
     return res.json({
       //token: user.generateJWT(),
       status: 200

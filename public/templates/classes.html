@@ -1,7 +1,7 @@
-    <style>
-    h3 a{
-        color: black;
-      }
+<style>
+	h3 a{
+		color: black;
+	}
 	.welcome{
 		margin-bottom: 40px;
 	}
@@ -14,73 +14,124 @@
 	.btn-add{
 		width: 200px;
 	}
-    </style>
-    <script>
-    function classClicked(id){
-    	alert('You clicked class '+id);
-    }
-    </script>
-   <div class="container">
-    <!-- Header -->
-    <header>
-     <div class="row">
-      <div class="col-md-9"><h3><a href="#/">flipped.</a></h3></div>
-      <div class="col-md-3" style="padding-top: 30px">
-                    <div class="btn-group">
-            <button type="button" class="btn btn-primary btn-lg"><i class="fa fa-home"></i></button>
-            <button type="button" class="btn btn-primary btn-lg"><i class="fa fa-user"></i></button>
-            <button type="button" class="btn btn-primary btn-lg"><i class="fa fa-comment"></i></button>
-            <button type="button" class="btn btn-primary btn-lg"><i class="fa fa-sign-out"></i></button>
-          </div>
-        </div>
-      </div>
-    </header>
-    <!-- Start of Content -->
-    <content>
-     <div class="welcome">
-     	<div class="row">
-     		<div class="col-md-9"><h1>Hi there, <strong>Shahzeb</strong>.</h1></div>
-     		<div class="col-md-3" style="padding-top: 30px">
-     			<button class="btn btn-lg btn-success btn-add"><i class="fa fa-plus-circle"></i> Add classes</button>
-     		</div>
-     	</div>
-     </div>
-     <!-- For each class... -->
-     <div class="row">
-     	<div class="col-md-4">
-     		<div class="jumbotron" onClick="classClicked(1)">
-     			<div class="jumbotron-photo"><img src="img/italy.jpg" /></div>
-     			<div class="jumbotron-contents" style="background: #3BAFDA">
-     				<h1>Italy 101</h1>
-     			</div>
-     		</div>
-     	</div>
-     	<div class="col-md-4">
-     		<div class="jumbotron" onClick="classClicked(2)">
-     			<div class="jumbotron-photo"><img src="img/math.jpg" /></div>
-     			<div class="jumbotron-contents" style="background: #3BAFDA">
-     				<h1>Math 101</h1>
-     			</div>
-     		</div>
-     	</div>
-     	<div class="col-md-4">
-     		<div class="jumbotron" onClick="classClicked(3)">
-     			<div class="jumbotron-photo"><img src="img/chemistry.jpg" /></div>
-     			<div class="jumbotron-contents" style="background: #3BAFDA">
-     				<h1>Chemistry 101</h1>
-     			</div>
-     		</div>
-     	</div>
-     	<div class="col-md-4">
-     		<div class="jumbotron" onClick="classClicked(4)">
-     			<div class="jumbotron-photo"><img src="img/physics.jpg" /></div>
-     			<div class="jumbotron-contents" style="background: #3BAFDA">
-     				<h1>Physics 101</h1>
-     			</div>
-     		</div>
-     	</div>
-     </div>
- </div>
-    </content>
-  </div>
-  <!-- End of container -->
+	.capital{
+		text-transform: capitalize;
+	}
+</style>
+<script>
+	$('#myModal').on('new-class-add', function () {
+		$('#classid').focus()
+	})
+</script>
+<div class="container">
+	<!-- Header -->
+	<header>
+		<div class="row">
+			<div class="col-md-9"><h3><a href="#/">flipped.</a></h3></div>
+			<div class="col-md-3" style="padding-top: 30px">
+				<div class="btn-group">
+					<button type="button" class="btn btn-primary btn-lg"><i class="fa fa-home"></i></button>
+					<button type="button" class="btn btn-primary btn-lg"><i class="fa fa-user"></i></button>
+					<button type="button" class="btn btn-primary btn-lg"><i class="fa fa-comment"></i></button>
+					<button type="button" class="btn btn-primary btn-lg"><i class="fa fa-sign-out"></i></button>
+				</div>
+			</div>
+		</div>
+	</header>
+	<!-- Start of Content -->
+	<content>
+		<div class="welcome">
+			<div class="row">
+				<div class="col-md-9"><h1>Hi there, {{loggedInUser}}.</h1></div>
+				<div class="col-md-3" style="padding-top: 30px">
+					<!-- if a student is logged in then show the following: -->
+					<button ng-hide="isTeacher()" class="btn btn-lg btn-success btn-add" data-toggle="modal" data-target=".new-class-add-student"><i class="fa fa-plus-circle"></i> Add classes</button>
+					<!-- if a teacher is logged in then show the following: -->
+					<button ng-show="isTeacher()" class="btn btn-lg btn-success btn-add" data-toggle="modal" data-target=".new-class-add-teacher"><i class="fa fa-plus-circle"></i> Add classes</button>
+				</div>
+			</div>
+		</div>
+		<!-- For each class... -->
+		<div class="row">
+			<div class="col-md-4" ng-repeat="classtitle in classList">
+				<div class="jumbotron"  ng-click="classClick(classtitle)">
+					<div class="jumbotron-photo"><img src="img/italy.jpg" /></div>
+					<div class="jumbotron-contents" style="background: #3BAFDA">
+						<h1>{{classtitle}}</h1>
+					</div>
+				</div>
+			</div>
+			<!--<div class="col-md-4">-->
+				<!--<div class="jumbotron" onClick="classClicked(2)">-->
+					<!--<div class="jumbotron-photo"><img src="img/math.jpg" /></div>-->
+					<!--<div class="jumbotron-contents" style="background: #3BAFDA">-->
+						<!--<h1>Math 101</h1>-->
+					<!--</div>-->
+				<!--</div>-->
+			<!--</div>-->
+			<!--<div class="col-md-4">-->
+				<!--<div class="jumbotron" onClick="classClicked(3)">-->
+					<!--<div class="jumbotron-photo"><img src="img/chemistry.jpg" /></div>-->
+					<!--<div class="jumbotron-contents" style="background: #3BAFDA">-->
+						<!--<h1>Chemistry 101</h1>-->
+					<!--</div>-->
+				<!--</div>-->
+			<!--</div>-->
+			<!--<div class="col-md-4">-->
+				<!--<div class="jumbotron" onClick="classClicked(4)">-->
+					<!--<div class="jumbotron-photo"><img src="img/physics.jpg" /></div>-->
+					<!--<div class="jumbotron-contents" style="background: #3BAFDA">-->
+						<!--<h1>Physics 101</h1>-->
+					<!--</div>-->
+				<!--</div>-->
+			<!--</div>-->
+		</div>
+</div>
+
+<!-- modal -->
+<div class="modal fade new-class-add-student">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">Adding a class as a student:</h4>
+			</div>
+			<div class="modal-body">
+				<form ng-submit="studentAddClass()">
+					<input type="text" class="input-group input-lg" id="classid" placeholder="Class ID" style="width: 100%" ng-model="class.code"><br>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary">Add class</button>
+				</form>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<!-- modal -->
+<div class="modal fade new-class-add-teacher">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">Adding a class as a teacher:</h4>
+			</div>
+			<div class="modal-body">
+				<form ng-submit="teacherAddClass()">
+					<input type="text" class="input-group input-lg" placeholder="Class ID" style="width: 100%" ng-model="class.name"><br>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary">Add class</button>
+				</form>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+</content>
+</div>
+<!-- End of container -->

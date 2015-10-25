@@ -1,12 +1,49 @@
-app.controller('lectureCtrl', ['$scope', '$routeParams',
-  function($scope, $routeParams) {
+app.controller('lectureCtrl', ['$scope', '$routeParams','$location',
+  function($scope, $routeParams, $location) {
+    $scope.lectureList = ['Lecture 1', 'Lecture 2', 'Lecture 3'];
     $scope.lectureId = $routeParams.lectureId;
     $scope.classId = $routeParams.classId;
+
+    $scope.lectureClick = function(lectureTitle){
+      //console.log(classTitle);
+
+      $location.path('/lecture/'+$scope.classId+'/'+lectureTitle);
+    }
   }]);
 
-app.controller('classCtrl', ['$scope', '$routeParams',
+
+app.controller('homeCtrl', ['$scope', '$routeParams',
   function($scope, $routeParams) {
+    //$scope.classId = $routeParams.id;
+  }]);
+
+app.controller('classCtrl', ['$scope', '$routeParams','auth','fClass','$location',
+  function($scope, $routeParams,auth,fClass,$location) {
+    $scope.classList = ["Math1","Math2","Math3"];
+
+    $scope.classClick = function(classTitle){
+      //console.log(classTitle);
+
+      $location.path('/lecture/'+classTitle);
+    }
+
     $scope.classId = $routeParams.id;
+    $scope.loggedInUser = auth.currentUser();
+    $scope.isTeacher = function(){
+      console.log(auth.isTeacher());
+      return auth.isTeacher();
+    }
+
+    //console.log($scope.teacher);
+    //console.log($scope.loggedInUser);
+    $scope.studentAddClass = function(){
+
+    }
+
+    $scope.teacherAddClass = function(){
+        fClass.addClass(auth.currentUser(), $scope.class.name);
+    }
+
   }]);
 
 app.controller('streamCtrl', ['$scope', '$routeParams',
@@ -36,7 +73,7 @@ app.controller('signupCtrl', ['$scope', '$routeParams','auth','$location',
       auth.register($scope.user).error(function(error){
         $scope.error = error;
       }).then(function(){
-        $location.path('/class');
+        $location.path('/login');
       });
     }
 
@@ -74,12 +111,25 @@ app.controller('makeCtrl', ['$scope', '$routeParams','lectureMake',
     }
   }]);
 
-app.controller('shoutoutCtrl', ['$scope', '$routeParams',
-  function($scope, $routeParams) {
+app.controller('shoutoutCtrl', ['$scope', '$routeParams', '$http',
+  function($scope, $routeParams, $http) {
     $scope.classId = $routeParams.classId;
     // When the submit text message button is clicked
     $scope.sendText = function(){
-      alert("You called me");
+      
+      var textVal = $("textarea#textMessage").val();
+      $http({
+      method: 'POST',
+      url: '/text',
+      data: {text: textVal}
+      }).then(function successCallback(response) {
+        $("#form").hide();
+        $("#success").fadeIn("slow");
+      }, function errorCallback(response) {
+        console.log('error');
+        console.log(response);
+    });
+
     }
     
   }]);
