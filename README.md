@@ -1,6 +1,6 @@
-# Node.js Starter Overview
+# Flipped is a Flipped class room software
 
-The Node.js Starter demonstrates a simple, reusable Node.js web application based on the Express framework.
+Built for Hacking EDU in 2015. Uses: Node.js (Express framework), along with Twilio (for texting students), and Angular (on the front end).
 
 ## Run the app locally
 
